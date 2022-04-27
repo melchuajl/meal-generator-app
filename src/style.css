@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+}
+
+body {
+    padding: 0; 
+    margin: auto;
+    display: flex; 
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    justify-items: center;
+    background-color: black;
+}
+
+.container {
+    width: 60%;
+    padding: 10px;
+    background-color: white;
+    border: solid 1px black; 
+    border-radius: 5px;
+}
+
+.btn-active {
+    background-color: #036922;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
