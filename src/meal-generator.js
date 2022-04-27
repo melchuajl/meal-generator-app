@@ -5,7 +5,7 @@ const questionContainer = document.getElementById('question-container')
 const questionText = document.getElementById('question')
 const optionButtons = document.getElementById('option-buttons')
 
-let shuffledQuestions, currentQuestionIndex, selectedOption
+var shuffledQuestions, currentQuestionIndex, userChoice
 
 const startGame = () => {
     console.log("Game has started");
@@ -14,14 +14,6 @@ const startGame = () => {
     shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
     getNextQuestion()
-}
-
-const getNextQuestion = () => {
-    resetState();
-    showQuestion(shuffledQuestions[currentQuestionIndex]); 
-    currentQuestionIndex++; 
-    // let choice = 
-    // return choice
 }
 
 const showQuestion = (question) => {
@@ -45,16 +37,15 @@ const resetState = () => {
 
 const selectOption = (event) => {
     nextButton.classList.remove('hide');
-    selectedOption = event.target;
-    // console.log(selectedButton); 
-    selectedOption = true;
+    userChoice = event.target.innerText; 
     setStatusClass(optionButtons);
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')
     } else {
         nextButton.classList.add('hide')
         resultButton.classList.remove('hide')
-    }
+    };
+    return userChoice
 }
 
 const setStatusClass = (element) => {
@@ -64,6 +55,13 @@ const setStatusClass = (element) => {
         element.classList.add('disabled');
         element.disabled = true;
     }
+}
+
+const getNextQuestion = () => {
+    resetState();
+    showQuestion(shuffledQuestions[currentQuestionIndex]); 
+    currentQuestionIndex++; 
+    console.log(userChoice)
 }
 
 const questions = [
