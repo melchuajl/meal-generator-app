@@ -5,17 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/src/style.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <script defer src="/src/index.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <script defer src="/src/meal-generator.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div class="container" id="question-box">
-        <div id="question">Question</div>
-        <div id="answer-buttons">
-            <button class="btn">Option 1</button>
-            <button class="btn">Option 2</button>
+    <div class="container">
+        <div id="question-container" class="hide">
+          <div id="question">Question</div>
+          <div id="option-buttons" class="btn-grid">
+            <button class="option-btn btn">Option 1</button>
+            <button class="option-btn btn">Option 2</button>
+            <button class="option-btn btn">Option 3</button>
+            <button class="option-btn btn">Option 4</button>
+          </div>
         </div>
-    </div>
+        <div class="controls">
+          <button id="start-btn" class="start-btn btn" onclick="startGame()">Start</button>
+          <button id="next-btn" class="next-btn btn hide" onclick="getNextQuestion()">Next</button>
+          <button id="result-btn" class="result-btn btn hide" onclick="getResult()">Get my result!</button>
+        </div>
+      </div>
 </body>
 </html>
