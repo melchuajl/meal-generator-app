@@ -78,16 +78,24 @@ body {
 .start-btn {
     margin:10px;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: bold; 
     padding: 10px 20px;
-    background-color: blue;
+    background-color: black;
     min-width: 250px;
 }
 
-.next-btn, 
-.result-btn,
-.random-btn,
-.restart-btn {
+.start-btn:hover, 
+.restart-btn:hover {
+    background-color: #DA291C;
+}
+
+.start-btn:active, 
+.restart-btn:active {
+    background-color: #DA291C;
+    transform: translateY(4px);
+}
+
+.next-btn {
     font-weight: bold;
     padding: 10px 20px;
     background-color: blue;
@@ -95,19 +103,25 @@ body {
     font-size: 0.8rem;
 }
 
-.start-btn:hover,
+.result-btn,
+.random-btn,
+.restart-btn {
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: black;
+    max-width: 250px;
+    font-size: 0.8rem;
+}
+
 .next-btn:hover, 
 .random-btn:hover, 
-.result-btn:hover, 
-.restart-btn:hover {
+.result-btn:hover { 
     background-color: #0000aa;
 }
 
-.start-btn:active,
 .next-btn:active,
 .random-btn:active, 
-.result-btn:active,
-.restart-btn:active {
+.result-btn:active {
     background-color: #0000aa;
     transform: translateY(4px);
 }

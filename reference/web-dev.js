@@ -26,7 +26,7 @@ function setNextQuestion() {
 }
 
 function showQuestion(question) {
-  questionElement.innerText = question.question
+  questionElement.innerText = question.question 
   question.answers.forEach(answer => {
     const button = document.createElement('button')
     button.innerText = answer.text
@@ -60,7 +60,7 @@ function selectAnswer(e) {
     startButton.innerText = 'Restart'
     startButton.classList.remove('hide')
   }
-}
+} 
 
 function setStatusClass(element, correct) {
   clearStatusClass(element)

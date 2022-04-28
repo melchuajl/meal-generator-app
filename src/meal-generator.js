@@ -42,8 +42,8 @@ const resetState = () => {
 const selectOption = (event) => {
     nextButton.classList.remove('hide');
     userChoice = event.target.innerText;
-    // event.target.classList.add('selected')
-    setStatusClass(event.target);
+    // resetButtonClass();
+    setButtonClass(event.target);
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')
     } else {
@@ -53,48 +53,58 @@ const selectOption = (event) => {
     return userChoice
 }
 
-const setStatusClass = (element) => {
-    if (element.classList.contains('selected')) {
-        element.classList.remove('selected')
-    } else {
-        element.classList.add('selected')
+const setButtonClass = (element) => {
+    // if (element.classList.includes('selected')) {
+    //     element.classList.remove('selected')
+    // } else {
+    element.classList.add('selected')
     }
-}
+// }
+
+// const resetButtonClass = () => {
+//     const indvBtn = Array.from(optionButtons.children).map(e => e);
+//     indvBtn.forEach(button => {
+//         if (button.classList.includes('selected')) {
+//             button.classList.remove('selected')
+//         }
+//     })
+// }
 
 const getNextQuestion = () => {
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex]);
     currentQuestionIndex++;
-    console.log(userChoice);
+    console.log(userChoice)
 }
 
 const filterFoodOptions = () => {
-    filteredFoodAray = foodOptions.filter(option => option.prop.includes(userChoice)); 
-    foodOptions = filteredFoodAray; 
-    console.log(filteredFoodAray) // just to check that the filter is working
+    filteredFoodArray = foodOptions.filter(option => option.prop.includes(userChoice));
+    foodOptions = filteredFoodArray;
+    console.log(filteredFoodArray) // just to check that the filter is working
 }
 
 const getResult = () => {
     questionContainer.classList.add('hide');
-    resultContainer.classList.remove('hide'); 
+    resultContainer.classList.remove('hide');
     resultButton.classList.add('hide');
-    let foodNames = filteredFoodAray.name;
-    if (filteredFoodAray.length > 0) {
+    let foodNames = filteredFoodArray.map(({ name }) => name).join('\n');
+    if (filteredFoodArray.length > 0) {
         resultContainer.innerText = foodNames
     } else {
         resultContainer.innerText = 'None of the food options match your selections!';
-        randomButton.classList.remove('hide'); 
+        randomButton.classList.remove('hide');
         randomButton.innerText = 'I give up! Give me something random'
-    }
+    };
+    restartButton.classList.remove('hide');
 }
 
 const randomOption = () => {
     startButton.classList.add('hide');
     randomButton.classList.add('hide');
     restartButton.classList.remove('hide');
-    resultContainer.classList.remove('hide'); 
+    resultContainer.classList.remove('hide');
     let randomIndex = Math.floor(Math.random() * fullFoodOptions.length);
-    let randomFood = fullFoodOptions[randomIndex].name; 
+    let randomFood = fullFoodOptions[randomIndex].name;
     resultContainer.innerText = randomFood
 }
 
@@ -103,7 +113,7 @@ const restartGame = () => {
     randomButton.classList.remove('hide');
     randomButton.innerText = 'Give me a random option!'
     restartButton.classList.add('hide');
-    resultContainer.classList.add('hide'); 
+    resultContainer.classList.add('hide');
 }
 
 startButton.addEventListener('click', startGame)
@@ -117,26 +127,77 @@ restartButton.addEventListener('click', restartGame)
 const fullFoodOptions = [
     {
         name: 'Fish soup',
-        prop: ['Hot', 'Asian', 'None', 'No', 'Soupy', 'Non-spicy', 'I want to eat healthy', 'Low (<$8)']
+        prop: ['Hot', 'Asian', 'None', 'No', 'Soupy', 'Non-spicy', 'I want to eat healthy', 'Low']
     },
     {
-        name: 'Nasi Lemak',
-        prop: ['Hot', 'Asian', 'Rice', 'No', 'Saucy', 'I need comfort food', 'Low (<$8)']
+        name: 'Nasi lemak',
+        prop: ['Hot', 'Asian', 'Rice', 'No', 'Non-spicy', 'Saucy', 'I need comfort food', 'Low']
+    },
+    {
+        name: 'Mee soto',
+        prop: ['Hot', 'Asian', 'Noodles', 'Spicy', 'No', 'Soupy', 'I need comfort food', 'Low']
+    },
+    {
+        name: 'Soup Spoon',
+        prop: ['Hot', 'Western', 'Bread or potatoes', 'Yes', 'Soupy', 'Non-spicy', 'I need comfort food', 'Middle']
+    },
+    {
+        name: 'Subway',
+        prop: ['Cold', 'Western', 'Bread or potatoes', 'Yes', 'Saucy', 'Non-spicy', 'I want to eat healthy', 'Low']
+    },
+    {
+        name: 'Salad Stop',
+        prop: ['Cold', 'Western', 'None', 'Yes', 'Saucy', 'Non-spicy', 'I want to eat healthy', 'High']
+    },
+    {
+        name: 'Chicken chop',
+        prop: ['Hot', 'Western', 'Bread or potatoes', 'No', 'Saucy', 'Non-spicy', 'I need comfort food', 'Middle']
+    },
+    {
+        name: 'Poke bowl',
+        prop: ['Cold', 'Asian', 'Rice', 'No', 'Saucy', 'Non-spicy', 'I want to eat healthy', 'Middle']
+    },
+    {
+        name: 'Sushi Tei',
+        prop: ['Cold', 'Asian', 'Rice', 'No', 'Saucy', 'Non-spicy', 'I want to eat healthy', 'High']
+    },
+    {
+        name: 'Mixed veg rice',
+        prop: ['Hot', 'Asian', 'Rice', 'Yes', 'Saucy', 'Non-spicy', 'I need comfort food', 'Low']
+    },
+    {
+        name: 'Minced meat noodle',
+        prop: ['Hot', 'Asian', 'Noodles', 'No', 'Saucy', 'Spicy', 'I need comfort food', 'Low']
+    },
+    {
+        name: 'Tom yum goong',
+        prop: ['Hot', 'Asian', 'None', 'No', 'Soupy', 'Spicy', 'I need comfort food', 'Low']
+    },
+    {
+        name: 'Wanton mee',
+        prop: ['Hot', 'Asian', 'Noodles', 'No', 'Saucy', 'Non-spicy', 'I need comfort food', 'Low']
+    },
+    {
+        name: 'Chicken rice',
+        prop: ['Hot', 'Asian', 'Rice', 'No', 'Saucy', 'Non-spicy', 'I need comfort food', 'Low']
+    },
+    {
+        name: 'Popiah',
+        prop: ['Hot', 'Asian', 'None', 'Yes', 'Saucy', 'Non-spicy', 'I want to eat healthy', 'Low']
+    },
+    {
+        name: 'Pasta',
+        prop: ['Hot', 'Western', 'Noodles', 'Yes', 'Saucy', 'Non-spicy', 'I need comfort food', 'Middle']
+    },
+    {
+        name: `Cold and soupy? I think you're looking for dessert!`,
+        prop: ['Cold', 'Western', 'Asian', 'Noodles', 'Rice', 'Bread or potatoes', 'None', 'Yes', 'No', 'Soupy', 'Non-spicy', 'I want to eat healthy', 'I need comfort food', 'Low', 'Middle', 'High']
     }
 ]
 
-let foodOptions = [
-    {
-        name: 'Fish soup',
-        prop: ['Hot', 'Asian', 'None', 'No', 'Soupy', 'Non-spicy', 'I want to eat healthy', 'Low (<$8)']
-    },
-    {
-        name: 'Nasi Lemak',
-        prop: ['Hot', 'Asian', 'Rice', 'No', 'Saucy', 'I need comfort food', 'Low (<$8)']
-    }
-]
+let foodOptions = [...fullFoodOptions]
 
-let filteredFoodAray = []
+let filteredFoodArray = []
 
 const questions = [
     {
@@ -191,11 +252,14 @@ const questions = [
         ]
     },
     {
-        question: `What's your budget?`,
+        question: `What's your budget? \n 
+        High (>$17) \n
+        Middle ($8-$17) \n
+        Low (<$8)`,
         options: [
-            { text: 'High (>$17)' },
-            { text: 'Middle ($8-$17)' },
-            { text: 'Low (<$8)' }
+            { text: 'High' },
+            { text: 'Middle' },
+            { text: 'Low' }
         ]
     }
 ]
