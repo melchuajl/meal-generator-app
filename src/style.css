@@ -24,6 +24,16 @@ body {
     box-shadow: 0 0 10px 1px;
 }
 
+#question-container {
+    text-align: center;
+    margin: 20px;
+}
+
+#result-container {
+    text-align: center;
+    margin: 20px;
+}
+
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -34,6 +44,7 @@ body {
 
 .option-btn {
     align-self: stretch;
+    min-height: 75px;
 }
 
 .option-btn:hover {
@@ -65,36 +76,48 @@ body {
 }
 
 .start-btn {
+    margin:10px;
     font-size: 2rem;
     font-weight: bold;
     padding: 10px 20px;
     background-color: blue;
+    min-width: 250px;
 }
 
 .next-btn, 
-.result-btn {
+.result-btn,
+.random-btn,
+.restart-btn {
     font-weight: bold;
     padding: 10px 20px;
     background-color: blue;
+    max-width: 250px;
+    font-size: 0.8rem;
 }
 
 .start-btn:hover,
 .next-btn:hover, 
-.result-btn:hover {
+.random-btn:hover, 
+.result-btn:hover, 
+.restart-btn:hover {
     background-color: #0000aa;
 }
 
 .start-btn:active,
 .next-btn:active,
-.result-btn:active {
+.random-btn:active, 
+.result-btn:active,
+.restart-btn:active {
     background-color: #0000aa;
     transform: translateY(4px);
 }
 
 .controls {
     display: flex;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
+    grid-template-columns: 1;
 }
 
 .hide {

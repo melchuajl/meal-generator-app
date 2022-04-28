@@ -1,0 +1,10 @@
+[
+    {
+        "name": "fish soup", 
+        "prop": ["hot", "asian", "soupy"]
+    }, 
+    {
+        "name": "nasi lemak", 
+        "prop": []
+    }
+]

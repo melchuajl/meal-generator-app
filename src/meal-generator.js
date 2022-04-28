@@ -1,15 +1,19 @@
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const resultButton = document.getElementById('result-btn')
+const randomButton = document.getElementById('random-btn')
+const restartButton = document.getElementById('restart-btn')
 const questionContainer = document.getElementById('question-container')
+const resultContainer = document.getElementById('result-container')
 const questionText = document.getElementById('question')
 const optionButtons = document.getElementById('option-buttons')
 
-var shuffledQuestions, currentQuestionIndex, userChoice
+var shuffledQuestions, currentQuestionIndex, userChoice;
 
 const startGame = () => {
     console.log("Game has started");
     startButton.classList.add('hide');
+    randomButton.classList.add('hide');
     questionContainer.classList.remove('hide');
     shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
@@ -37,8 +41,9 @@ const resetState = () => {
 
 const selectOption = (event) => {
     nextButton.classList.remove('hide');
-    userChoice = event.target.innerText; 
-    setStatusClass(optionButtons);
+    userChoice = event.target.innerText;
+    // event.target.classList.add('selected')
+    setStatusClass(event.target);
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')
     } else {
@@ -49,20 +54,89 @@ const selectOption = (event) => {
 }
 
 const setStatusClass = (element) => {
-    if (element) {
-        element.classList.add('selected')
+    if (element.classList.contains('selected')) {
+        element.classList.remove('selected')
     } else {
-        element.classList.add('disabled');
-        element.disabled = true;
+        element.classList.add('selected')
     }
 }
 
 const getNextQuestion = () => {
     resetState();
-    showQuestion(shuffledQuestions[currentQuestionIndex]); 
-    currentQuestionIndex++; 
-    console.log(userChoice)
+    showQuestion(shuffledQuestions[currentQuestionIndex]);
+    currentQuestionIndex++;
+    console.log(userChoice);
 }
+
+const filterFoodOptions = () => {
+    filteredFoodAray = foodOptions.filter(option => option.prop.includes(userChoice)); 
+    foodOptions = filteredFoodAray; 
+    console.log(filteredFoodAray) // just to check that the filter is working
+}
+
+const getResult = () => {
+    questionContainer.classList.add('hide');
+    resultContainer.classList.remove('hide'); 
+    resultButton.classList.add('hide');
+    let foodNames = filteredFoodAray.name;
+    if (filteredFoodAray.length > 0) {
+        resultContainer.innerText = foodNames
+    } else {
+        resultContainer.innerText = 'None of the food options match your selections!';
+        randomButton.classList.remove('hide'); 
+        randomButton.innerText = 'I give up! Give me something random'
+    }
+}
+
+const randomOption = () => {
+    startButton.classList.add('hide');
+    randomButton.classList.add('hide');
+    restartButton.classList.remove('hide');
+    resultContainer.classList.remove('hide'); 
+    let randomIndex = Math.floor(Math.random() * fullFoodOptions.length);
+    let randomFood = fullFoodOptions[randomIndex].name; 
+    resultContainer.innerText = randomFood
+}
+
+const restartGame = () => {
+    startButton.classList.remove('hide');
+    randomButton.classList.remove('hide');
+    randomButton.innerText = 'Give me a random option!'
+    restartButton.classList.add('hide');
+    resultContainer.classList.add('hide'); 
+}
+
+startButton.addEventListener('click', startGame)
+randomButton.addEventListener('click', randomOption)
+nextButton.addEventListener('click', getNextQuestion)
+nextButton.addEventListener('click', filterFoodOptions)
+resultButton.addEventListener('click', filterFoodOptions)
+resultButton.addEventListener('click', getResult)
+restartButton.addEventListener('click', restartGame)
+
+const fullFoodOptions = [
+    {
+        name: 'Fish soup',
+        prop: ['Hot', 'Asian', 'None', 'No', 'Soupy', 'Non-spicy', 'I want to eat healthy', 'Low (<$8)']
+    },
+    {
+        name: 'Nasi Lemak',
+        prop: ['Hot', 'Asian', 'Rice', 'No', 'Saucy', 'I need comfort food', 'Low (<$8)']
+    }
+]
+
+let foodOptions = [
+    {
+        name: 'Fish soup',
+        prop: ['Hot', 'Asian', 'None', 'No', 'Soupy', 'Non-spicy', 'I want to eat healthy', 'Low (<$8)']
+    },
+    {
+        name: 'Nasi Lemak',
+        prop: ['Hot', 'Asian', 'Rice', 'No', 'Saucy', 'I need comfort food', 'Low (<$8)']
+    }
+]
+
+let filteredFoodAray = []
 
 const questions = [
     {
@@ -80,7 +154,7 @@ const questions = [
         ]
     },
     {
-        question: `What's your carb of choice?`,
+        question: `Carb of choice?`,
         options: [
             { text: 'Noodles' },
             { text: 'Rice' },
@@ -96,10 +170,10 @@ const questions = [
         ]
     },
     {
-        question: 'Do you feel like something soupy?',
+        question: 'Which do you prefer?',
         options: [
-            { text: 'Yes' },
-            { text: 'No' }
+            { text: 'Soupy' },
+            { text: 'Saucy' }
         ]
     },
     {
@@ -125,4 +199,3 @@ const questions = [
         ]
     }
 ]
-
