@@ -7,6 +7,7 @@ const questionContainer = document.getElementById('question-container')
 const resultContainer = document.getElementById('result-container')
 const questionText = document.getElementById('question')
 const optionButtons = document.getElementById('option-buttons')
+const loadingGIF = document.getElementById('loading')
 
 var shuffledQuestions, currentQuestionIndex, userChoice;
 
@@ -58,7 +59,7 @@ const setButtonClass = (element) => {
     //     element.classList.remove('selected')
     // } else {
     element.classList.add('selected')
-    }
+}
 // }
 
 // const resetButtonClass = () => {
@@ -87,15 +88,19 @@ const getResult = () => {
     questionContainer.classList.add('hide');
     resultContainer.classList.remove('hide');
     resultButton.classList.add('hide');
+    loadingGIF.classList.remove('hide')
     let foodNames = filteredFoodArray.map(({ name }) => name).join('\n');
-    if (filteredFoodArray.length > 0) {
-        resultContainer.innerText = foodNames
-    } else {
-        resultContainer.innerText = 'None of the food options match your selections!';
-        randomButton.classList.remove('hide');
-        randomButton.innerText = 'I give up! Give me something random'
-    };
-    restartButton.classList.remove('hide');
+    setTimeout(() => {
+        if (filteredFoodArray.length > 0) {
+            resultContainer.innerText = foodNames
+        } else {
+            resultContainer.innerText = 'None of the food options match your selections!';
+            randomButton.classList.remove('hide');
+            randomButton.innerText = 'I give up! Give me something random'
+        };
+        restartButton.classList.remove('hide');
+        loadingGIF.classList.add('hide')
+    }, 3000)
 }
 
 const randomOption = () => {
@@ -113,7 +118,9 @@ const restartGame = () => {
     randomButton.classList.remove('hide');
     randomButton.innerText = 'Give me a random option!'
     restartButton.classList.add('hide');
+    resultContainer.innerText = "";
     resultContainer.classList.add('hide');
+    loadingGIF.classList.add('hide')
 }
 
 startButton.addEventListener('click', startGame)

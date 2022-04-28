@@ -34,6 +34,10 @@ body {
     margin: 20px;
 }
 
+#loading {
+    text-align: center;
+}
+
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

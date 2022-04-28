@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/src/style.css" rel="stylesheet">
+    <link href="./src/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-    <script defer src="/src/meal-generator.js"></script>
+    <script defer src="./src/meal-generator.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <title>Document</title>
 </head>
@@ -21,7 +21,10 @@
             <button class="option-btn btn">Option 4</button>
           </div>
         </div>
-        <div id="result-container" class="hide"></div>
+        <div id="result-container" class="hide"></div>          
+        <div id="loading" class="hide">
+            <img src="./src/pizza-loading.gif">
+          </div>
         <div class="controls">
           <button id="start-btn" class="start-btn btn">Start</button>
           <button id="next-btn" class="next-btn btn hide">Next</button>
