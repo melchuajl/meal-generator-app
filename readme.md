@@ -7,6 +7,6 @@ The way to use this app is simple:
 2. Click '**Next**' to move on to the next question
 3. The result will be displayed after you've answered all questions
 4. If nothing matches your preferences, you can opt to randomise the result
-5. You may also choose to generate a random at the start instead of going through the questions
+5. You may also choose to generate a random option at the start instead of going through the questions
 
 Have fun!
